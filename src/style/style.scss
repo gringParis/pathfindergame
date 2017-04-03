@@ -1,0 +1,428 @@
+/*in case of cutting edge properties*/
+@mixin prefix($map, $vendors: webkit khtml moz ms o) {
+ @each $prop, $value in $map {
+ @if $vendors {
+ @each $vendor in $vendors {
+ #{"-" + $vendor + "-" + $prop}: #{$value};
+ }
+ }
+#{$prop}: #{$value};
+ }
+}
+
+$fun-font:'Press Start 2P', cursive;
+$regular-font:'Russo One', sans-serif;
+
+$color-error: #984B43;
+$color-visited:#5a818e;
+$color-hint:#e8c402;
+$color-regular:#18121E;
+$color-bg:#171717;
+
+$mobileWidth:767px;
+$mobileAndTabletWidth:980px;
+$mobileAndTabletLandscapeWidth:1024px;
+$mobileLandscapeWidth:900px;
+
+
+
+
+/* css reset from  http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: white;
+}
+
+
+
+/*layout css*/
+body{
+	font-family: 'Russo One', sans-serif;
+}
+
+body, .hint-time, .ctrls{
+	background-color: $color-bg;
+	color: white;
+
+}
+div{
+	box-sizing: border-box;
+}
+.ctrls{
+	margin-top: 1em; 
+}
+.title{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 35px;
+    line-height: 40px;
+    letter-spacing: 3px;
+    padding-top: 10px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 11;
+    background-color: $color-regular;
+}
+.title.mobile-portrait{
+	display: none;
+}
+
+
+.main, .context-menu-container{
+    margin: auto;
+    max-width: 945px;
+    min-width: 280px;
+}
+.main{
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    margin-top: 1em;
+}
+
+.grid-container{
+    display: inline-block;
+	width: 100%;
+	max-width: 860px;
+    margin: auto;
+    background-color: white;
+
+}
+
+/*board css*/
+
+.grid{
+    padding-top: 0.4%;
+    padding-left: 0.4%;
+    padding-bottom: 0.2%;
+}
+.hint-time {
+	padding-bottom:2px;
+	height: 5px;
+}
+.ln{
+    vertical-align: middle;
+    padding-bottom: 0.15em;
+}
+.hint-progress{
+	height: 5px;
+	background-color: $color-hint/*#EAC67A*/;
+	width:0%;
+	transition-property: width;
+	transition-timing-function: linear;
+}
+.hint-progress.active{
+	width:100%;
+	transition-duration: 0s
+}
+
+.cell{
+	display: inline-block;
+	margin:0;
+	background-color: $color-regular;
+	margin-right:0.4%;
+    cursor: pointer;
+	transition-property: background-color;
+	transition-timing-function: linear;
+	transition-duration: 0.4s;
+    vertical-align: middle;
+}
+.cell.hint{
+	background-color: $color-hint /*#EAC67A*/;
+}
+.cell.error{
+	background-color: $color-error;
+}
+.cell.visited{
+	background-color: $color-visited;
+}
+.float{
+	float: left;
+}
+
+.ln{
+	margin-top: 0px;
+}
+
+/*Level bar css*/
+
+.lvl-bar-container{
+	display: inline-block;
+	vertical-align: bottom;
+	background-color: white;
+	margin-right: 5px;
+    width: 5%;
+	margin-left: -1.9%;
+
+}
+.lvlDigit {
+    background-color: $color-bg;
+    text-align: center;
+    line-height: 40px;
+    font-size: 30px;
+}
+.lvlDigit .label{
+	font-size: 15px;
+}
+
+
+.lvl{
+   	padding-bottom: 81%;
+    margin: 10%;
+    background-color: gold;
+}
+
+/*context menu css*/
+
+.context-menu-container {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    z-index: 10;
+    max-width: 930px;
+    margin: auto;
+    text-align: center;
+}
+.mask{
+    min-width: 280px;
+    margin: auto;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 9;
+    text-align: center;
+    padding-bottom: 0%;
+
+}
+.mask-game-over{
+   	background-size: 150px 186px;
+	background-position: center 15%;
+    background-image:url("./game-over1.png");
+    background-repeat: no-repeat;
+}
+
+.menu-title {
+    font-size: 64px;
+    font-family: 'Press Start 2P', cursive;
+    padding-top: 43%;
+    text-transform: capitalize;
+    line-height: 75px;
+}
+
+.mask-title-container{
+    max-width: 945px;
+    margin: auto;	
+}
+
+
+.menu{
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding-bottom: 10%;
+}
+.menu-item{
+    font-size: 35px;
+    line-height: 40px;
+    letter-spacing: 3px;
+    cursor: pointer;
+}
+
+
+.hidder{
+	width: 100%;
+	height: 100%;
+    position: absolute;
+   	opacity: 0.7;
+    top: 0;
+    z-index: 8;
+    background-color: $color-regular;
+}
+
+
+
+
+/*mobile media query*/
+
+
+
+
+
+
+@media screen and (max-width: $mobileAndTabletWidth) {
+	
+	.main, .context-menu-container{
+		max-width: 760px;
+	}
+
+	
+	.context-menu {
+	    margin-left: -1%;
+	}
+
+	.menu-title, .menu-title.game-over{
+    	/* padding-top: 35%; */
+	    font-size: 40px;
+    }
+	
+}
+
+
+
+
+@media screen and (max-width: $mobileWidth)  {
+	.title.mobile-portrait{
+		display: none;
+	}
+	
+	
+   
+   	.mask-game-over{
+    	background-size: 100px 124px;
+    }
+   
+
+}
+
+
+@media screen and (max-width: $mobileAndTabletWidth) and(orientation: portrait){
+
+	.menu-title{
+	    padding-top: 58%;
+	  }
+
+	 .grid-container {
+	    display: block;
+	}
+	.lvl-bar-container{
+		display: block;
+		width: 100%;
+		background-color: inherit;
+		margin-top:3em;
+	}
+
+   .lvl{
+		display: inline-block;    
+		padding-bottom: 4.4%;
+		width: 5.5%;
+		margin: 0;
+		border: 0.15em solid white;
+		margin-right: 0.15em;
+   }
+   .lvlDigit{
+		display: inline-block; 
+		padding-bottom: 0;
+		vertical-align: center;
+		line-height: 25px;
+		font-size: 25px;
+		padding-right: 4%;
+		padding-left: 4%;
+   }
+   .lvlDigit .label{
+   		font-size: 15px;
+   }
+
+}
+
+
+@media screen and (max-width: $mobileWidth)  and(orientation: portrait){
+	/* .menu-title{
+	    padding-top: 59%;
+    } */
+
+}
+
+@media screen and (max-width: $mobileAndTabletLandscapeWidth) and(orientation: landscape){
+	/*because grid was not completly on screen on ipad landscape*/
+	.main, .context-menu-container{
+		width: 77%;
+	}
+	.lvl-bar-container{
+    	margin-left: -2.9%;
+    }
+    .grid-container {
+    	width: 95%;
+	}
+	.mask-game-over{
+    	background-position: center 24%;
+    }
+}
+
+@media screen and (max-width: $mobileLandscapeWidth)  and(orientation: landscape){
+	
+
+	.main{
+		padding-top: 0.1%; 
+    	width: 60%;
+	}
+	.context-menu-container{
+    	width: 63%;
+	 }
+	.mask-game-over{
+    	background-position: center 6%;
+    }
+    .menu-title{
+    	padding-top: 6%;
+    }
+     .menu-title.game-over{
+    	display: none;
+    }
+    .menu{
+		padding-bottom: 3%;
+    } 
+
+    .grid-container {
+    	width: 90%;
+	}
+	.lvl-bar-container{
+	    width: 10%;
+	    margin-left: -4.9%;
+    }
+}

@@ -48,7 +48,7 @@ export default class Grid extends React.Component
 		}
 		return(
 			<div class="ct">
-				<h1 class="title">Gring's pathfinder</h1>
+				<h1 class="title mobile-portrait">Gring's pathfinder</h1>
 				<div class="main">
 					<div class="main-game">
 						<div class="lvl-bar-container"><LvlBar lvl={this.props.lvl} lvlMin={this.props.lvlMin} /></div>

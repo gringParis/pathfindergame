@@ -4,7 +4,7 @@ export default function(gameLogic){
     switch (action.type) {
       case "TRY_CELL": 
       {
-          if(!state.isFinished)
+          if(!state.isFinished && !state.hintMode)
           {
             var nextState = JSON.parse(JSON.stringify(gameLogic.play(action.i,action.j, state)))
             return nextState

@@ -2,7 +2,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 //import Grid from "./components/grid"
-require('./style/style.css')
+require('./style/style.scss')
 
 import { Provider } from "react-redux"
 import gameContainerFn from "./containers/gameContainer"

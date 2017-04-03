@@ -22,9 +22,9 @@ class GameLogic{
 	{
 		var props = {
     
-		    lvl: 3,
+		    lvl: 18,
 		    lvlMax : 6,
-		    lvlMin : 3,
+		    lvlMin : 18,
 		    showLength: 5,
 		    name: "pathFinder",
 		    isFinished: false,
@@ -217,7 +217,9 @@ class GameLogic{
 		while(!nextCell.stop)
 		{//choose one cell
 			console.log("pathMaker loop")
-			console.log("CELL ON PATH : ")	
+			console.log("current path")
+			console.log(path)
+			console.log("next CELL ON PATH : ")	
 			//console.log(nextCell.i + " " + nextCell.j)
 			console.log(nextCell)
 			path.push(nextCell)
@@ -235,12 +237,14 @@ class GameLogic{
 				nextCell = nextCell.possibleCells[nextI]
 			}else
 			{//no solution to this path so we bakctrack
-				console.log("bakctrack")
+				console.log("#### BACKTRACK BACKTRACK BACKTRACK BACKTRACK ####")
 				//we introduce a reset to avoid searching to long a possible path
 				backTrackCp++
 				if(backTrackCp > lvl * 5)
 				{
+					console.log("backtrack reset")
 					var nextCell = { i : 0, j : Math.floor( Math.random() * lvl), stop:false}
+					path=[]
 					resetCp++
 				}else
 				{
