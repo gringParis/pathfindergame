@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from "redux"
 import reducer from "./reducers"
 import  { createLogger } from "redux-logger"
-import { change_level , end_hintmode } from './actions/gameActions'
+import { change_level , end_hintmode, mouse_up } from './actions/gameActions'
 
 export default function( gameLogic){
 	//this middleware is dedicated to chaining actions
@@ -13,12 +13,13 @@ export default function( gameLogic){
 			{
 				if(nextState.game.isFinishedLvl && !nextState.game.isFinished)
 				{
-					store.dispatch(change_level())
+					setTimeout(()=>{store.dispatch(change_level())}, 500)
 				}
 				break
 			}
 			case "CHANGE_LEVEL":
 			{
+				store.dispatch(mouse_up())
 				setTimeout(()=>{store.dispatch(end_hintmode())}, nextState.game.showLength * 1000)
 				break
 			}

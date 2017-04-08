@@ -37,3 +37,32 @@ export function game_restart(){
 		type: 'GAME_RESTART'
 	}
 }
+
+export function show_scores()
+{
+	return {
+		type: 'SHOW_SCORES'
+	}
+}
+
+export function back_to_game()
+{
+	return {
+		type: 'BACK_TO_GAME'
+	}
+}
+
+export function mouse_down()
+{
+	return {
+		type: 'MOUSE_DOWN'
+	}
+}
+
+
+export function mouse_up()
+{
+	return {
+		type: 'MOUSE_UP'
+	}
+}

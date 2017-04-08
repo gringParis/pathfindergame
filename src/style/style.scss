@@ -81,6 +81,28 @@ table {
 
 
 /*layout css*/
+
+
+.ct{
+	display: table;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.vertical-middle{
+	display: table-cell;
+    vertical-align: middle;
+}
+
+.main{
+	margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
 body{
 	font-family: 'Russo One', sans-serif;
 }
@@ -96,23 +118,6 @@ div{
 .ctrls{
 	margin-top: 1em; 
 }
-.title{
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 35px;
-    line-height: 40px;
-    letter-spacing: 3px;
-    padding-top: 10px;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 11;
-    background-color: $color-regular;
-}
-.title.mobile-portrait{
-	display: none;
-}
-
 
 .main, .context-menu-container{
     margin: auto;
@@ -122,13 +127,12 @@ div{
 .main{
     padding-left: 0.6em;
     padding-right: 0.6em;
-    margin-top: 1em;
 }
 
-.grid-container{
+.main.game .grid-container{
     display: inline-block;
 	width: 100%;
-	max-width: 860px;
+	max-width: 850px;
     margin: auto;
     background-color: white;
 
@@ -192,7 +196,7 @@ div{
 /*Level bar css*/
 
 .lvl-bar-container{
-	display: inline-block;
+	display: none;
 	vertical-align: bottom;
 	background-color: white;
 	margin-right: 5px;
@@ -200,6 +204,12 @@ div{
 	margin-left: -1.9%;
 
 }
+
+.lvl-bar-container.game{
+	display: inline-block;
+}
+
+
 .lvlDigit {
     background-color: $color-bg;
     text-align: center;
@@ -287,12 +297,53 @@ div{
 }
 
 
+/*best score scree */
+
+.main.scores{
+	height: 100%;
+	width: 100%;
+}
+
+.grid-menu{
+	background-color: $color-bg;
+    text-align: center;
+    padding: 5%;
+}
+
+.grid-menu h1{
+    font-family: 'Press Start 2P', cursive;
+    font-size: 32px;
+    padding-bottom: 10%;
+}
 
 
-/*mobile media query*/
 
-
-
+.grid-menu .close-menu{
+    background:url("./closeMedium.png") top right no-repeat;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 50px;
+}
+.score{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5em;
+}
+.ctas{
+	position: absolute;
+	bottom: 1em;
+	left: 6em;
+	right: 7em;
+}
+.btn{
+	background-color: $color-regular;
+	border:2px solid white;
+    line-height: 30px;
+    width: 100px;
+    margin: auto;
+}
 
 
 
@@ -338,10 +389,10 @@ div{
 	    padding-top: 58%;
 	  }
 
-	 .grid-container {
+	.main.game  .grid-container {
 	    display: block;
 	}
-	.lvl-bar-container{
+	.lvl-bar-container.game{
 		display: block;
 		width: 100%;
 		background-color: inherit;
@@ -381,13 +432,13 @@ div{
 
 @media screen and (max-width: $mobileAndTabletLandscapeWidth) and(orientation: landscape){
 	/*because grid was not completly on screen on ipad landscape*/
-	.main, .context-menu-container{
+	.main.game, .context-menu-container{
 		width: 77%;
 	}
-	.lvl-bar-container{
+	.lvl-bar-container.game{
     	margin-left: -2.9%;
     }
-    .grid-container {
+    .main.game .grid-container {
     	width: 95%;
 	}
 	.mask-game-over{
@@ -398,7 +449,7 @@ div{
 @media screen and (max-width: $mobileLandscapeWidth)  and(orientation: landscape){
 	
 
-	.main{
+	.main.game{
 		padding-top: 0.1%; 
     	width: 60%;
 	}
@@ -418,11 +469,20 @@ div{
 		padding-bottom: 3%;
     } 
 
-    .grid-container {
+    .main.game .grid-container {
     	width: 90%;
 	}
-	.lvl-bar-container{
+	.lvl-bar-container.game{
 	    width: 10%;
 	    margin-left: -4.9%;
     }
+}
+
+
+.mouseHelp{
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	font-size:25px;
 }

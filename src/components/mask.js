@@ -8,7 +8,7 @@ export default class Mask extends React.Component {
 	}
 
   render() {
-    if(this.props.isFinished)
+    if(this.props.mode == "game" && this.props.isFinished)
     { 
       return (
           <div>
@@ -19,7 +19,7 @@ export default class Mask extends React.Component {
           </div> 
        )
     }
-  else if(!this.props.hasStarted)
+  else if(this.props.mode == "game" && !this.props.hasStarted)
   {
       return (
          <div>
@@ -31,6 +31,7 @@ export default class Mask extends React.Component {
         )
   }
   else{
+      console.log(this.props.mode)
       return (<div></div>)
     }
   }

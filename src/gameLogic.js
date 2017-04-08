@@ -22,9 +22,9 @@ class GameLogic{
 	{
 		var props = {
     
-		    lvl: 18,
+		    lvl: 4,
 		    lvlMax : 6,
-		    lvlMin : 18,
+		    lvlMin : 4,
 		    showLength: 5,
 		    name: "pathFinder",
 		    isFinished: false,

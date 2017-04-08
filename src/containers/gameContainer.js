@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
-import { try_cell, change_level, game_start } from '../actions/gameActions'
-import Grid from '../components/grid'
+import { try_cell, change_level, game_start, show_scores, back_to_game, mouse_down, mouse_up } from '../actions/gameActions'
+import Main from '../components/main'
 
 
 export default function(gameLogic){
@@ -11,7 +11,7 @@ export default function(gameLogic){
   * mapping from redux state to react props for connected component
   */
   const mapStateToProps = (state, ownProps) => {
-    return state.game
+    return state
   }
   /**
   * mapping of dispatched redux actions to react connected component
@@ -22,15 +22,25 @@ export default function(gameLogic){
         console.log(ownProps)
         dispatch(try_cell(i, j))
       },
-      test_thunk:()=>{
-        dispatch(test_thunk(gameLogic))
-      },
       change_level:()=>{
         dispatch(change_level())
       },
       game_start:()=>{
         dispatch(game_start())
-      }
+      },
+      show_scores:()=>{
+        dispatch(show_scores())
+      },
+      back_to_game:()=>{
+        dispatch(back_to_game())
+      },
+      mouse_down:()=>{
+        dispatch(mouse_down())
+      },
+      mouse_up:()=>{
+        dispatch(mouse_up())
+      },
+      
     }
   }
 
@@ -42,6 +52,6 @@ export default function(gameLogic){
   const GameContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Grid)
+  )(Main)
   return GameContainer
 }
