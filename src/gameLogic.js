@@ -26,13 +26,13 @@ class GameLogic{
 		    lvlMax : 6,
 		    lvlMin : 4,
 		    showLength: 5,
-		    name: "pathFinder",
 		    isFinished: false,
 		    isError: false,
 		    isFinishedLvl: false,
 		    remainingCells: 2,
 		    hintMode: false,
 		    hasStarted:true,
+		    score: 0,
 		    grid: [
 		      [{
 		        i: 0,
@@ -83,12 +83,6 @@ class GameLogic{
 			        j,
 			        hasBeenVisited: false
 			      }
-				/*if(j == 0)
-				{
-			        lines[i][j].isOnThePath = true
-			        if(!isFirst)
-			        	lines[i][j].showHint = true
-				}*/
 			}
 		}
 		
@@ -137,6 +131,7 @@ class GameLogic{
 		state.grid[i][j].hasBeenVisited = true
 		if(state.grid[i][j].isOnThePath == true)
 		{//the selected cell is correct
+			state.score = state.score + state.lvl - state.lvlMin + 1
 			if(this.isLvlFinished(state))
 	        {
 				state.isFinishedLvl = true
@@ -245,6 +240,7 @@ class GameLogic{
 					console.log("backtrack reset")
 					var nextCell = { i : 0, j : Math.floor( Math.random() * lvl), stop:false}
 					path=[]
+					backTrackCp = 0
 					resetCp++
 				}else
 				{

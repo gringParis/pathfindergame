@@ -40,8 +40,10 @@ export default class Main extends React.Component
 		console.log(this.props.game.showLength)
 		var hintBarC = "hint-progress" 
 		var transitionDuration = "0s"
+		var hintClass = ""
 		if(this.props.game.hintMode == true)
 		{
+			hintClass = " hint-mode"
 			classes +=" hint-mode"
 			hintBarC += " active"
 			transitionDuration = this.props.game.showLength + "s"
@@ -49,9 +51,9 @@ export default class Main extends React.Component
 		return(
 			<div class="ct">
 				<div class="vertical-middle">
-					<div class={"main " + this.props.nav.menu}>
+					<div class={"main " + this.props.nav.menu + hintClass}>
 						<div class="main-game">
-							<div class={"lvl-bar-container " + this.props.nav.menu}><LvlBar lvl={this.props.game.lvl} lvlMin={this.props.game.lvlMin} /></div>
+							<div class={"lvl-bar-container " + this.props.nav.menu}><LvlBar lvl={this.props.game.lvl} lvlMin={this.props.game.lvlMin} score={this.props.game.score} /></div>
 							<div class="grid-container">
 								<div class={"hint-time"}><div class={hintBarC} style={{transitionDuration}}></div></div>
 									{this.renderGrid()}
@@ -62,7 +64,8 @@ export default class Main extends React.Component
 						<ContextMenu mode={this.props.nav.menu} isFinished={this.props.game.isFinished} hasStarted={this.props.game.hasStarted} game_start={this.props.game_start} show_scores={this.props.show_scores}/>
 					</div>
 					<Mask mode={this.props.nav.menu} isFinished={this.props.game.isFinished} hasStarted={this.props.game.hasStarted} />
-					<div class="mouseHelp">ggg</div>
+					{/*<div class="mouseHelp">ggg</div>*/}
+					<div class="scoreHelp help">{"Score: " + this.props.game.score}</div>
 				</div>
 			</div>
 		)

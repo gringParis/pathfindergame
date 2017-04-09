@@ -22,6 +22,7 @@ export default class LvlBar extends React.Component {
     }
     return (
         <div class="lvlBar">
+          {/*<div class="lvlDigit">{this.props.score}</div>*/}
           <div class="lvlDigit"><span class="label">lvl</span>{this.props.lvl + 1 - this.props.lvlMin}</div>
           {sqrts.map( this.renderSqrt)}
         </div>

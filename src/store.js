@@ -28,6 +28,11 @@ export default function( gameLogic){
 				setTimeout(()=>{store.dispatch(end_hintmode())}, nextState.game.showLength * 1000)
 				break
 			}
+			case "END_HINTMODE":
+			{
+				store.dispatch(mouse_up())
+				break
+			}
 
 		}
 		

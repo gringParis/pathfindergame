@@ -22,7 +22,7 @@ export default class Cell extends React.Component {
   		classes +="def"
     const size = (100 / this.props.lvl) -0.4
     return (
-        <div class={classes} style={{'width' : size + '%', 'paddingBottom': size + '%'}}onClick={(e) => { e.preventDefault(); if(!this.props.showHint) {this.props.try_cell(this.props.i,  this.props.j)} }}>
+        <div id={"cell-" + this.props.i + "-" + this.props.j}  class={classes} style={{'width' : size + '%', 'paddingBottom': size + '%'}}onClick={(e) => { e.preventDefault(); if(!this.props.showHint) {this.props.try_cell(this.props.i,  this.props.j)} }}>
           
         </div>
     );

@@ -35,7 +35,6 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
           name: "vendor",
             // (the commons chunk name)
-
           filename: "vendor.min.js",
       }),
     new webpack.LoaderOptionsPlugin({

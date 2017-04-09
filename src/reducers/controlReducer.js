@@ -10,7 +10,6 @@ export default function reducer(state={"pressed" : false}, action) {
       return {"pressed" : false}
     }
     default:{
-      console.log(action)
       return state 
     }
   }

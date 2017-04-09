@@ -32,7 +32,6 @@ export default function(gameLogic){
       }
       
       default:{
-        console.log(action)
         return state 
       }
     }
