@@ -15,9 +15,10 @@ $regular-font:'Russo One', sans-serif;
 
 $color-error: #984B43;
 $color-visited:#fff; /* #5a818e; */
-$color-hint:#FFDD1B; /* #e8c402; */
-$color-regular:#18121E;
-$color-bg:#171717;
+$color-hint: #DCD447; /*  #FFDD1B;  *//* #e8c402; */
+$color-regular:#1E3D6F; /* #18121E; */
+$color-bg: #070707; /*  #1C2A21; */ /* #171717; */
+$color-hint-reverse:#2D3C46;
 
 $mobileWidth:767px;
 $mobileAndTabletWidth:980px;
@@ -119,9 +120,9 @@ div{
 	margin-top: 1em; 
 }
 
-.main, .context-menu-container{
+.main{
     margin: auto;
-    max-width: 945px;
+    max-width: 860px;
     min-width: 280px;
 }
 .main{
@@ -130,7 +131,6 @@ div{
 }
 
 .main.game .grid-container{
-    display: inline-block;
 	width: 100%;
 	max-width: 850px;
     margin: auto;
@@ -143,7 +143,7 @@ background-color: $color-hint;
 }
 
 .grid.hint-mode .cell.def{
-background-color: black;
+background-color: $color-hint-reverse;
 }
 
 
@@ -209,9 +209,10 @@ background-color: black;
 	vertical-align: bottom;
 	background-color: white;
 	margin-right: 5px;
-    width: 5%;
-	margin-left: -1.9%;
-
+    width: 3%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* 
@@ -257,9 +258,9 @@ background-color: black;
     position: absolute;
     width: 100%;
     top: 0;
+    right: 0;
     height: 100%;
     z-index: 10;
-    max-width: 930px;
     margin: auto;
     text-align: center;
 }
@@ -285,7 +286,7 @@ background-color: black;
 .menu-title {
     font-size: 64px;
     font-family:'Press Start 2P', cursive;
-    padding-top: 43%;
+    padding-top: 35%;
     text-transform: capitalize;
     line-height: 75px;
     
@@ -354,7 +355,7 @@ background-color: black;
    	opacity: 0.7;
     top: 0;
     z-index: 8;
-    background-color: $color-regular;
+    background-color: $color-bg;
 }
 
 
@@ -411,7 +412,7 @@ background-color: black;
 
 @media screen and (max-width: $mobileAndTabletWidth) {
 	
-	.main, .context-menu-container{
+	.main{
 		max-width: 760px;
 	}
 
@@ -421,7 +422,6 @@ background-color: black;
 	}
 
 	.menu-title, .menu-title.game-over{
-    	/* padding-top: 35%; */
 	    font-size: 40px;
     }
 	
@@ -447,21 +447,11 @@ background-color: black;
 
 @media screen and (max-width: $mobileAndTabletWidth) and(orientation: portrait){
 
-	.menu-title{
-	    padding-top: 58%;
-	  }
-
-  .context-menu-container{
-		    left: 0;
-	}
-	.main.game  .grid-container {
-	    display: block;
-	}
+	
 	.lvl-bar-container.game{
 		display: block;
-		width: 100%;
+		width: 50%;
 		background-color: inherit;
-		margin-top:3em;
 	}
 
    .lvl{
@@ -497,14 +487,11 @@ background-color: black;
 
 @media screen and (max-width: $mobileAndTabletLandscapeWidth) and(orientation: landscape){
 	/*because grid was not completly on screen on ipad landscape*/
-	.main.game, .context-menu-container{
+	.main.game{
 		width: 77%;
 	}
-	.lvl-bar-container.game{
-    	margin-left: -2.9%;
-    }
     .main.game .grid-container {
-    	width: 95%;
+    	width: 90%;
 	}
 	.mask-game-over{
     	background-position: center 24%;
@@ -518,27 +505,17 @@ background-color: black;
 		padding-top: 0.1%; 
     	width: 60%;
 	}
-	.context-menu-container{
-    	width: 63%;
-	 }
+	.menu-title{
+		padding-top: 6%;
+	}
 	.mask-game-over{
     	background-position: center 6%;
-    }
-    .menu-title{
-    	padding-top: 6%;
     }
     
     .menu{
 		padding-bottom: 3%;
     } 
-
-    .main.game .grid-container {
-    	width: 90%;
-	}
-	.lvl-bar-container.game{
-	    width: 10%;
-	    margin-left: -4.9%;
-    }
+	
 }
 
 
