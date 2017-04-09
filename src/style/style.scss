@@ -451,6 +451,9 @@ background-color: black;
 	    padding-top: 58%;
 	  }
 
+  .context-menu-container{
+		    left: 0;
+	}
 	.main.game  .grid-container {
 	    display: block;
 	}
@@ -524,9 +527,7 @@ background-color: black;
     .menu-title{
     	padding-top: 6%;
     }
-     .menu-title.game-over{
-    	display: none;
-    }
+    
     .menu{
 		padding-bottom: 3%;
     } 
