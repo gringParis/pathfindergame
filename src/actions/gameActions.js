@@ -38,10 +38,11 @@ export function game_restart(){
 	}
 }
 
-export function show_scores()
+export function show_menu(menu)
 {
 	return {
-		type: 'SHOW_SCORES'
+		type: 'SHOW_MENU',
+		payload : menu
 	}
 }
 
@@ -64,5 +65,38 @@ export function mouse_up()
 {
 	return {
 		type: 'MOUSE_UP'
+	}
+}
+
+export function enter_player_name(name)
+{
+	return {
+		type: 'ENTER_PLAYER_NAME',
+		name: name
+	}
+}
+
+
+export function fetch_scores(scores)
+{
+	return {
+		type: 'FETCH_SCORES',
+		scores
+	}
+}
+
+export function add_rank(rank)
+{
+	return {
+		type: 'ADD_RANK',
+		rank
+	}
+}
+
+
+export function game_over()
+{
+	return {
+		type: 'GAME_OVER'
 	}
 }

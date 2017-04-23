@@ -13,9 +13,9 @@ export default function(gameLogic){
       }
       case "CHANGE_LEVEL":
       {
-        console.log("lvl changed")
+        //console.log("lvl changed")
         var nextState =  JSON.parse(JSON.stringify(gameLogic.changeLevel(state)))
-        console.log(nextState)
+        //console.log(nextState)
         return nextState
       }
       case "END_HINTMODE":
@@ -30,7 +30,10 @@ export default function(gameLogic){
       {
         return JSON.parse(JSON.stringify(gameLogic.start(state)))
       }
-      
+      case "ENTER_PLAYER_NAME":
+      {
+        return JSON.parse(JSON.stringify(gameLogic.enterPlayerName(action.payload, state))) 
+      }
       default:{
         return state 
       }

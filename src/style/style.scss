@@ -122,28 +122,26 @@ div{
 
 .main{
     margin: auto;
-    max-width: 860px;
     min-width: 280px;
 }
 .main{
     padding-left: 0.6em;
     padding-right: 0.6em;
 }
-
+.main.game{
+    max-width: 860px;	
+}
 .main.game .grid-container{
 	width: 100%;
 	max-width: 850px;
     margin: auto;
     background-color: white;
-
 }
-
 .grid.hint-mode{
-background-color: $color-hint;
+	background-color: $color-hint;
 }
-
 .grid.hint-mode .cell.def{
-background-color: $color-hint-reverse;
+	background-color: $color-hint-reverse;
 }
 
 
@@ -209,10 +207,10 @@ background-color: $color-hint-reverse;
 	vertical-align: bottom;
 	background-color: white;
 	margin-right: 5px;
-    width: 3%;
+    width: 38px;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 5px;
+    left: 5px;
 }
 
 /* 
@@ -230,6 +228,11 @@ background-color: $color-hint-reverse;
 }
  */
 
+
+
+
+
+
 .lvl-bar-container.game{
 	display: inline-block;
 }
@@ -238,8 +241,8 @@ background-color: $color-hint-reverse;
 .lvlDigit {
     background-color: $color-bg;
     text-align: center;
-    line-height: 40px;
-    font-size: 30px;
+    line-height: 25px;
+    font-size: 25px;
 }
 .lvlDigit .label{
 	font-size: 15px;
@@ -247,9 +250,11 @@ background-color: $color-hint-reverse;
 
 
 .lvl{
-   	padding-bottom: 81%;
+   	
     margin: 10%;
     background-color: $color-hint;
+    width: 30px;
+    height: 30px;
 }
 
 /*context menu css*/
@@ -286,12 +291,42 @@ background-color: $color-hint-reverse;
 .menu-title {
     font-size: 64px;
     font-family:'Press Start 2P', cursive;
-    padding-top: 35%;
+    padding-top: 1em; /* 35%; */
     text-transform: capitalize;
     line-height: 75px;
     
     /* color: $color-hint; text-shadow: 11px 9px 0px #000; */
 }
+
+input#player-name {
+    z-index: 119;
+    background: none;
+    border: none;
+    color: white;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 23px;
+    letter-spacing: -2px;
+    outline: none;
+    width: 100%;
+    margin-top: 0.5em;
+}
+
+
+.hide{display: none;}
+.how-to-play {
+    margin: 1em;
+}
+.how-to-play-in{
+    max-width: 650px;
+    margin: auto;
+}
+
+
+.grid-menu a{
+	color:$color-hint;
+}
+
 /* 
 
 .menu-title {
@@ -338,7 +373,7 @@ background-color: $color-hint-reverse;
 	position: absolute;
     bottom: 0;
     width: 100%;
-    padding-bottom: 10%;
+    padding-bottom: 1em;
 }
 .menu-item{
     font-size: 35px;
@@ -347,6 +382,10 @@ background-color: $color-hint-reverse;
     cursor: pointer;
 }
 
+.menu-item a{
+	color: inherit;
+    text-decoration: none;
+}
 
 .hidder{
 	width: 100%;
@@ -361,7 +400,7 @@ background-color: $color-hint-reverse;
 
 /*best score scree */
 
-.main.scores{
+.main.menu{
 	height: 100%;
 	width: 100%;
 }
@@ -376,6 +415,7 @@ background-color: $color-hint-reverse;
     font-family: 'Press Start 2P', cursive;
     font-size: 32px;
     padding-bottom: 10%;
+    margin-top: 1em;
 }
 
 
@@ -388,7 +428,7 @@ background-color: $color-hint-reverse;
     width: 50px;
     height: 50px;
 }
-.score{
+.menu-element{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.5em;
@@ -409,13 +449,11 @@ background-color: $color-hint-reverse;
 }
 
 
-
 @media screen and (max-width: $mobileAndTabletWidth) {
 	
 	.main{
 		max-width: 760px;
 	}
-
 	
 	.context-menu {
 	    margin-left: -1%;
@@ -456,8 +494,8 @@ background-color: $color-hint-reverse;
 
    .lvl{
 		display: inline-block;    
-		padding-bottom: 4.4%;
-		width: 5.5%;
+    	height: 20px;
+    	width: 20px;
 		margin: 0;
 		border: 0.15em solid white;
 		margin-right: 0.15em;
@@ -468,8 +506,8 @@ background-color: $color-hint-reverse;
 		vertical-align: center;
 		line-height: 25px;
 		font-size: 25px;
-		padding-right: 4%;
-		padding-left: 4%;
+		padding-right: 3%;
+		padding-left: 0;
    }
    .lvlDigit .label{
    		font-size: 15px;
@@ -499,7 +537,13 @@ background-color: $color-hint-reverse;
 }
 
 @media screen and (max-width: $mobileLandscapeWidth)  and(orientation: landscape){
-	
+	.grid-menu h1{
+		margin-top: 0;
+    	padding-bottom: 3%;
+	}
+	.menu-element:nth-child(n+10) {
+	    display: none;
+	}
 
 	.main.game{
 		padding-top: 0.1%; 
@@ -521,8 +565,15 @@ background-color: $color-hint-reverse;
 
 .help{
 	position: fixed;
-	top: 0;
-	right: 0;
+    top: 5px;
+    right: 5px;
 	color: white;
 	font-size:25px;
+}
+.help.menu{
+	display:none;
+}
+
+#fb-root {
+    display: none;
 }

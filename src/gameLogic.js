@@ -15,6 +15,7 @@ class GameLogic{
 		this.isThereAdjacentCellInPath = this.isThereAdjacentCellInPath.bind(this)
 		this.isInPath = this.isInPath.bind(this)
 		this.props = this.initProps(true)
+		this.enterPlayerName = this.enterPlayerName.bind(this)
 	}
 
 
@@ -25,13 +26,15 @@ class GameLogic{
 		    lvl: 4,
 		    lvlMax : 6,
 		    lvlMin : 4,
-		    showLength: 5,
+		    showLength: 3.5,
 		    isFinished: false,
-		    isError: false,
+		    /*isError: false,*/
+		    isReadyToStart: false,
 		    isFinishedLvl: false,
 		    remainingCells: 2,
 		    hintMode: false,
 		    hasStarted:true,
+		    lifes:1,
 		    score: 0,
 		    grid: [
 		      [{
@@ -73,7 +76,7 @@ class GameLogic{
 
 	getGrid(lvl, isFirst, path)
 	{
-		console.log(lvl)
+		////console.log(lvl)
 		let lines = []
 		for (var i = 0; i < lvl; i++) {
 			lines[i] = []
@@ -125,7 +128,7 @@ class GameLogic{
  	*/
 	play(i , j, state)
 	{
-		console.log("begin play")
+		//console.log("begin play")
 		//reverse array
 		i = state.grid.length-1 - i
 		state.grid[i][j].hasBeenVisited = true
@@ -138,9 +141,13 @@ class GameLogic{
 			}
 		}else
 		{//the cell is wrong
-			state.isError =true
-	        state.isFinishedLvl =true
-	        state.isFinished = true
+			/*state.isError =true*/
+			state.lifes--
+			if(state.lifes <= 0)
+			{
+				state.isFinishedLvl =true
+	        	state.isFinished = true
+			}
 		}
 		return state
 	}
@@ -157,7 +164,7 @@ class GameLogic{
 	    }, 0)
 		if(remainingCells == 0)
 		{
-			console.log("lvl finished")
+			//console.log("lvl finished")
 			return true
 		}
 		return false
@@ -169,16 +176,17 @@ class GameLogic{
 	changeLevel(state)
 	{
 		state.lvl++
+		state.lifes++
 		//generate a path
  		state.path = this.makePath(state.lvl)
  		//create new grid
 		state.grid = this.getGrid(state.lvl, false, state.path)
 		//trigger hint mode for this level
 		state.isFinishedLvl = false
-		state.showLength = state.showLength - 0.5
+		state.showLength = state.showLength + 0.25
 		state.hintMode = true
 
-		console.log(state)
+		//console.log(state)
 		return state
 	}
 
@@ -203,7 +211,7 @@ class GameLogic{
 	makePath(lvl)
 	{
 		
-		console.log("pathMaker")
+		//console.log("pathMaker")
 		var nextCell = { i : 0, j : Math.floor( Math.random() * lvl), stop:false}
 		var path = []
 		var exit = 0
@@ -211,33 +219,33 @@ class GameLogic{
 		var resetCp = 0
 		while(!nextCell.stop)
 		{//choose one cell
-			console.log("pathMaker loop")
-			console.log("current path")
-			console.log(path)
-			console.log("next CELL ON PATH : ")	
-			//console.log(nextCell.i + " " + nextCell.j)
-			console.log(nextCell)
+			//console.log("pathMaker loop")
+			//console.log("current path")
+			//console.log(path)
+			//console.log("next CELL ON PATH : ")	
+			////console.log(nextCell.i + " " + nextCell.j)
+			//console.log(nextCell)
 			path.push(nextCell)
 			nextCell.possibleCells = this.getNextPossibleCells(lvl, nextCell, path)
 			var nextI = 0
 			//put choosen cell into the path
 			if(nextCell.possibleCells.length > 1)
 			{
-				console.log("choose next random")
+				//console.log("choose next random")
 				nextI = Math.floor( Math.random() * nextCell.possibleCells.length)					
 				nextCell = nextCell.possibleCells[nextI]		
 			}else if(nextCell.possibleCells.length == 1)
 			{
-				console.log("1 choice")
+				//console.log("1 choice")
 				nextCell = nextCell.possibleCells[nextI]
 			}else
 			{//no solution to this path so we bakctrack
-				console.log("#### BACKTRACK BACKTRACK BACKTRACK BACKTRACK ####")
+				//console.log("#### BACKTRACK BACKTRACK BACKTRACK BACKTRACK ####")
 				//we introduce a reset to avoid searching to long a possible path
 				backTrackCp++
 				if(backTrackCp > lvl * 5)
 				{
-					console.log("backtrack reset")
+					//console.log("backtrack reset")
 					var nextCell = { i : 0, j : Math.floor( Math.random() * lvl), stop:false}
 					path=[]
 					backTrackCp = 0
@@ -256,8 +264,8 @@ class GameLogic{
 								return true
 							}
 						)
-						console.log("filtered")
-						console.log(path[path.length - 1].possibleCells)
+						//console.log("filtered")
+						//console.log(path[path.length - 1].possibleCells)
 						//if there is no other cells, we backtrack again else we stop
 						if(path[path.length - 1].possibleCells.length > 0)
 						{
@@ -271,7 +279,7 @@ class GameLogic{
 					else if(nextCell.possibleCells.length == 1)
 						nextCell = nextCell.possibleCells[nextI]
 					else{
-						console.log("backtrack exception")
+						//console.log("backtrack exception")
 						return path
 					}
 				}
@@ -284,9 +292,9 @@ class GameLogic{
 			}
 			exit++
 		}
-		console.log(nextCell)
-		console.log("final path: ")
-		console.log(path)
+		//console.log(nextCell)
+		//console.log("final path: ")
+		//console.log(path)
 		return path
 	}
 	
@@ -302,7 +310,7 @@ class GameLogic{
 		{*/
 			if(i == lvl - 1)
 			{//it's on the last line
-				console.log("can finish")
+				//console.log("can finish")
 				nextPossibleCells.push({stop : true})
 			}
 			if( j - 1 >= 0)
@@ -310,7 +318,7 @@ class GameLogic{
 				let possible = { i, j : j - 1}
 				if(!this.isInPath(possible, path) && !this.isThereAdjacentCellInPath(possible, cell, path))
 				{
-					console.log("can go left")
+					//console.log("can go left")
 					nextPossibleCells.push(possible)
 				}
 			}
@@ -319,7 +327,7 @@ class GameLogic{
 				let possible = { i, j : j + 1}
 				if(!this.isInPath(possible, path) && !this.isThereAdjacentCellInPath(possible, cell, path))
 				{
-					console.log("can go right")
+					//console.log("can go right")
 					nextPossibleCells.push(possible)
 				}
 			}
@@ -328,7 +336,7 @@ class GameLogic{
 				let possible = { i : i - 1, j}
 				if(!this.isInPath(possible, path) && !this.isThereAdjacentCellInPath(possible, cell, path))
 				{
-					console.log("can go bottom")
+					//console.log("can go bottom")
 					nextPossibleCells.push(possible)
 				}
 			}
@@ -337,7 +345,7 @@ class GameLogic{
 				let possible = { i : i + 1, j}
 				if(!this.isInPath(possible, path) && !this.isThereAdjacentCellInPath(possible, cell, path))
 				{
-					console.log("can go top")
+					//console.log("can go top")
 					nextPossibleCells.push(possible)
 				}
 			}
@@ -345,8 +353,8 @@ class GameLogic{
 		/*}else{
 			nextPossibleCells.push({i:1, j})
 		}*/
-		console.log("nextPossibleCells")
-		console.log(nextPossibleCells)
+		//console.log("nextPossibleCells")
+		//console.log(nextPossibleCells)
 		return nextPossibleCells
 	}
 
@@ -372,34 +380,41 @@ class GameLogic{
 			var isCurrentCell = previousCell.i == cell.i && previousCell.j == cell.j
 			if(isCurrentCell)
 			{ // we skip, it s a normal case
-				//console.log("current cell")
+				////console.log("current cell")
 				break
 			}
 			if(previousCell.i == possible.i + 1 && previousCell.j == possible.j )
 			{//is there yet in the path a cell on top of the possible cell
-				console.log("adjacent top")
+				//console.log("adjacent top")
 				return true
 			}
 
 			if(previousCell.i == possible.i - 1 && previousCell.j == possible.j )
 			{//is there yet in the path a cell at the bottom of the possible cell
-				console.log("adjacent bottol")
+				//console.log("adjacent bottol")
 				return true
 			}
 
 			if(previousCell.i == possible.i  && previousCell.j == possible.j - 1 )
 			{//is there yet in the path a cell on the left of the possible cell
-				console.log("adjacent left")
+				//console.log("adjacent left")
 				return true
 			}
 
 			if(previousCell.i == possible.i  && previousCell.j == possible.j + 1 )
 			{//is there yet in the path a cell on the right of the possible cell
-				console.log("adjacent right")
+				//console.log("adjacent right")
 				return true
 			}
 		}
 		return isProblematicCell
+	}
+
+	enterPlayerName(name, state)
+	{
+		state.playerName = name
+		state.isReadyToStart = true
+		return state
 	}
 
 }

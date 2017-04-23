@@ -12,6 +12,7 @@
   "author": "guillaume ringwald",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^0.16.1",
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
@@ -21,6 +22,7 @@
     "css-loader": "^0.27.3",
     "file-loader": "^0.11.1",
     "node-sass": "^4.5.2",
+    "pg": "^6.1.5",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
@@ -31,5 +33,6 @@
     "style-loader": "^0.16.0",
     "webpack": "^2.3.2",
     "webpack-dev-server": "^2.4.2"
-  }
+  },
+  "dependencies": {}
 }

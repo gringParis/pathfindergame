@@ -1,10 +1,15 @@
-export default function reducer(state={"menu" : "game"}, action) {
+
+export default function reducer(state={"menu" : "welcome"}, action) {
 
   switch (action.type) {
-    case "SHOW_SCORES": 
+    case "SHOW_MENU": 
     {
-      //var nextState = JSON.parse(JSON.stringify({"menu" : "scores"})))
-      var nextState = {"menu" : "scores"}
+      var nextState = {"menu" : action.payload}
+      return nextState
+    }
+    case "ENTER_PLAYER_NAME": 
+    {
+      var nextState =  {"menu" : "game"}
       return nextState
     }
     case "BACK_TO_GAME":
@@ -13,7 +18,6 @@ export default function reducer(state={"menu" : "game"}, action) {
       return nextState
     }
     default:{
-      console.log(action)
       return state 
     }
   }

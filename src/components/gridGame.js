@@ -14,7 +14,7 @@ export default class Grid extends React.Component
 		this.isOnPreviousCell = this.isOnPreviousCell.bind(this)
 		this.allCells = []
 		this.currentNbCells = 0
-		console.log(this.props)
+		
 
 	}
 
@@ -41,7 +41,7 @@ export default class Grid extends React.Component
 
 	render()
 	{
-		console.log('render Grid' )		
+		
 		var classes = "grid grid-" + this.props.grid.length
 		var hintBarC = "hint-progress" 
 		var transitionDuration = "0s"
@@ -88,7 +88,6 @@ export default class Grid extends React.Component
 				{
 					return 1
 				}
-				console.log("sort is bugged")
 				return -1
 			})
 			this.allCellsY = arCells.sort((a, b) =>{
@@ -105,10 +104,8 @@ export default class Grid extends React.Component
 				{//a is bigger than b
 					return 1
 				} 
-				console.log("sort is bugged")
 				return -1
 			})
-			console.log("updateCellsArrays")
 		}
 	}
 
@@ -116,7 +113,6 @@ export default class Grid extends React.Component
 
 		if(Math.abs(y - this.allCells[0].offsetTop) < Math.abs(y - this.allCells[this.allCells.length - 1].offsetTop))
 		{//position is closest to the beginig of the array (because of the sort)
-			console.log("normal search")
 			for (var i = 0; i < this.allCells.length; i++) {
 				if(this.allCells[i].offsetTop < y && this.allCells[i].offsetTop + this.allCells[i].offsetHeight > y && this.allCells[i].offsetLeft < x && this.allCells[i].offsetLeft + this.allCells[i].offsetWidth > x)
 				{
@@ -127,7 +123,6 @@ export default class Grid extends React.Component
 			}
 		}else
 		{//position is closest to the end of the array. Because of the sort
-			console.log("reverse search")
 			for (var i = this.allCells.length - 1 ; i >= 0 ; i--) {
 				if(this.allCells[i].offsetTop < y && this.allCells[i].offsetTop + this.allCells[i].offsetHeight > y && this.allCells[i].offsetLeft < x && this.allCells[i].offsetLeft + this.allCells[i].offsetWidth > x)
 				{
@@ -138,9 +133,6 @@ export default class Grid extends React.Component
 			}
 		}
 
-
-
-		console.log("is over no cell")
 		return false
 	}
 	isOnPreviousCell(x, y, previousCell)
@@ -171,7 +163,6 @@ export default class Grid extends React.Component
 		}
 		var mouseUpFn = (e)=>{
 			this.props.mouse_up()
-			console.log("released")
 		}
 
 		var mouseMoveFn = (e)=>{
@@ -181,7 +172,7 @@ export default class Grid extends React.Component
 				if(e.target != mouseTarget && e.target.classList.contains("cell"))
 				{
 					mouseTarget = e.target
-					console.log(e)
+					//console.log(e)
 					mouseTarget.click()
 				}
 				if(mouseHelp.length > 0)
@@ -197,11 +188,12 @@ export default class Grid extends React.Component
 
 
 		var handleLeave=(e) => {
-			console.log("touch leave")
+			//console.log("touch leave")
 		}
 		var touchTargets = {} 
 		//handle mobile touches
 		var touchdownFn = (e) => {
+			e.preventDefault()
 			if(!this.props.hintMode)
 			{
 				for (var i = 0; i < e.changedTouches.length; i++) {
@@ -241,7 +233,7 @@ export default class Grid extends React.Component
 						var currentTarget = this.whichIsTarget(e.changedTouches[i].pageX ,  e.changedTouches[i].pageY)
 						if(currentTarget && touchTargets[e.changedTouches[i].identifier] != currentTarget)
 						{
-							console.log("targetChanged")
+							//console.log("targetChanged")
 							touchTargets[e.changedTouches[i].identifier] = currentTarget
 							currentTarget.click()
 						}
@@ -278,7 +270,7 @@ export default class Grid extends React.Component
 		}
 
 
-		console.log(grid)
+		//console.log(grid)
 		
 	}
 
