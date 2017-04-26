@@ -107,7 +107,8 @@ export default class Main extends React.Component
 		var main = document.getElementById("main")
 		if(main.classList.contains("game"))
 			main.style.maxWidth = maxWidth + "px"
-		console.log(maxWidth)
+		else
+			main.style.maxWidth = window.innerWidth
 	}
 
 
