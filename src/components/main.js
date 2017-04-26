@@ -108,7 +108,8 @@ export default class Main extends React.Component
 		if(main.classList.contains("game"))
 			main.style.maxWidth = maxWidth + "px"
 		else
-			main.style.maxWidth = window.innerWidth
+			main.style.maxWidth = window.innerWidth + "px"
+		
 	}
 
 
@@ -133,6 +134,7 @@ export default class Main extends React.Component
 		this.setGridWidth()
 		
 		document.addEventListener('DOMContentLoaded', () => {
+
 			window.addEventListener('resize', this.setGridWidth)
 		})
 	}
