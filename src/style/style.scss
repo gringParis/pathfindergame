@@ -128,12 +128,9 @@ div{
     padding-left: 0.6em;
     padding-right: 0.6em;
 }
-.main.game{
-    max-width: 860px;	
-}
+
 .main.game .grid-container{
 	width: 100%;
-	max-width: 850px;
     margin: auto;
     background-color: white;
 }
@@ -373,6 +370,7 @@ input#player-name {
 	position: absolute;
     bottom: 0;
     width: 100%;
+    min-width:280px;
     padding-bottom: 1em;
 }
 .menu-item{
@@ -525,12 +523,7 @@ input#player-name {
 
 @media screen and (max-width: $mobileAndTabletLandscapeWidth) and(orientation: landscape){
 	/*because grid was not completly on screen on ipad landscape*/
-	.main.game{
-		width: 77%;
-	}
-    .main.game .grid-container {
-    	width: 90%;
-	}
+
 	.mask-game-over{
     	background-position: center 24%;
     }
@@ -545,10 +538,7 @@ input#player-name {
 	    display: none;
 	}
 
-	.main.game{
-		padding-top: 0.1%; 
-    	width: 60%;
-	}
+
 	.menu-title{
 		padding-top: 6%;
 	}

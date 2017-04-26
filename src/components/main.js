@@ -14,6 +14,7 @@ export default class Main extends React.Component
 	{
 		super(props)
 		this.start = this.start.bind(this)
+		this.setGridWidth= this.setGridWidth.bind(this)
 	}
 
 
@@ -62,6 +63,11 @@ export default class Main extends React.Component
 			hintBarC += " active"
 			transitionDuration = this.props.game.showLength + "s"
 		}
+
+		
+		//fix grid width for little desktop
+		var minHW =  (window.innerHeight < window.innerWidth)?window.innerHeight:window.innerWidth
+		var maxWidth = minHW - 40
 		return(
 			<div class="ct">
 				<div id="fb-root"></div>
@@ -69,7 +75,7 @@ export default class Main extends React.Component
 				<script></script>
 
 				<div class="vertical-middle">
-					<div class={"main " + showGameOrMenu + hintClass}>
+					<div class={"main " + showGameOrMenu + hintClass} id="main">
 						<div class="main-game">
 							<div class={"lvl-bar-container " + showGameOrMenu}><LvlBar lvl={this.props.game.lvl} lvlMin={this.props.game.lvlMin} score={this.props.game.score} lifes={this.props.game.lifes}/></div>
 							<div class="grid-container">
@@ -91,8 +97,29 @@ export default class Main extends React.Component
 		)
 	}
 
+	/**
+	* dynamicaly set grid width
+	*/
+	setGridWidth()
+	{
+		var minHW = (window.innerHeight < window.innerWidth)?window.innerHeight:window.innerWidth
+		var maxWidth = minHW - 40
+		var main = document.getElementById("main")
+		if(main.classList.contains("game"))
+			main.style.maxWidth = maxWidth + "px"
+		console.log(maxWidth)
+	}
+
+
+	componentDidUpdate()
+	{
+		this.setGridWidth()
+	}
 	componentDidMount()
 	{
+
+		
+
 		(function(d, s, id) {
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
@@ -100,6 +127,13 @@ export default class Main extends React.Component
 		  js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.9";
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
+
+
+		this.setGridWidth()
+		
+		document.addEventListener('DOMContentLoaded', () => {
+			window.addEventListener('resize', this.setGridWidth)
+		})
 	}
 
 }
