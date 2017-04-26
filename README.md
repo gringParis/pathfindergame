@@ -1,5 +1,6 @@
 ##This is a vintage memory game
-# player has to reproduce a path which is shown to him at the begining of each lvl
+
+player has to reproduce a path which is shown to him at the begining of each lvl
 
 ## Instructions to run
 
