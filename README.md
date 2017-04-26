@@ -1,4 +1,4 @@
-##This is a vintage memory game
+## This is a vintage memory game
 
 player has to reproduce a path which is shown to him at the begining of each lvl
 
@@ -9,11 +9,11 @@ player has to reproduce a path which is shown to him at the begining of each lvl
 4. Navigate to localhost:8080
 
 
-##Usage
+## Usage
 NPM run build to compile for production
 
 
-##Packages used for the project
+## Packages used for the project
 
 axios is a package to make ajax calls the api to record and fetch best scores
 
