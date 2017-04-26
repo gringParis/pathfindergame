@@ -18,7 +18,9 @@ class GameLogic{
 		this.enterPlayerName = this.enterPlayerName.bind(this)
 	}
 
-
+	/**
+	* this method allow to init the props of a game
+	*/
 	initProps(isFirst)
 	{
 		var props = {
@@ -66,14 +68,15 @@ class GameLogic{
 		  if(isFirst)
 		  	props.hasStarted = false
 		//generate a path
- 			
- 			var path = this.makePath(props.lvl)
-		  props.grid = this.getGrid(props.lvl, isFirst, path)
-		  props.path = path
-		  return props
+		var path = this.makePath(props.lvl)
+		props.grid = this.getGrid(props.lvl, isFirst, path)
+		props.path = path
+		return props
 	}
 
-
+	/**
+	* Build a grid for a specified level and a path
+	*/
 	getGrid(lvl, isFirst, path)
 	{
 		////console.log(lvl)
@@ -207,11 +210,16 @@ class GameLogic{
 		return state
 	}
 
-
+	/**
+	* create a path from the bottom to the top of the grid
+	* there are some constraints to respect, from one cell you can only go to the cell you come from and an other.
+	* we use backtraking to prevent to finish on a dead end... 
+	*/
 	makePath(lvl)
 	{
 		
 		//console.log("pathMaker")
+		//init randomly a first cell at the bottom of the grid
 		var nextCell = { i : 0, j : Math.floor( Math.random() * lvl), stop:false}
 		var path = []
 		var exit = 0
@@ -230,18 +238,19 @@ class GameLogic{
 			var nextI = 0
 			//put choosen cell into the path
 			if(nextCell.possibleCells.length > 1)
-			{
+			{ // there are several next possible cells we pick one randomly
 				//console.log("choose next random")
 				nextI = Math.floor( Math.random() * nextCell.possibleCells.length)					
 				nextCell = nextCell.possibleCells[nextI]		
 			}else if(nextCell.possibleCells.length == 1)
-			{
+			{//no choice to make here
 				//console.log("1 choice")
 				nextCell = nextCell.possibleCells[nextI]
 			}else
 			{//no solution to this path so we bakctrack
 				//console.log("#### BACKTRACK BACKTRACK BACKTRACK BACKTRACK ####")
-				//we introduce a reset to avoid searching to long a possible path
+				//we introduce a reset to avoid searching too long a possible path. When the size of the grid increase, lots of path can finish on a dead end. 
+				// to avoid the algorithm to search too long for a path, we stop search after a certain amout of backtracks ( based on current grid size (lvl))
 				backTrackCp++
 				if(backTrackCp > lvl * 5)
 				{
@@ -252,7 +261,7 @@ class GameLogic{
 					resetCp++
 				}else
 				{
-					var isRotten = true
+					var isRotten = true // the selected cell leads only to a dead ends
 					while(isRotten)
 					{
 						const rottenCell = path.pop()
@@ -298,18 +307,18 @@ class GameLogic{
 		return path
 	}
 	
-
+	/**
+	* get next possible cells for a cell and a path
+	* there should not be any loop in the path we draw...
+	*/
 	getNextPossibleCells(lvl, cell, path)
 	{
 		
 		var nextPossibleCells = []
 		const i = cell.i
 		const j = cell.j
-		//test left or right only if not on first line
-		/*if(cell.i > 0)
-		{*/
 			if(i == lvl - 1)
-			{//it's on the last line
+			{//it's on the last line. So the path could stop of continue
 				//console.log("can finish")
 				nextPossibleCells.push({stop : true})
 			}
@@ -350,14 +359,15 @@ class GameLogic{
 				}
 			}
 		
-		/*}else{
-			nextPossibleCells.push({i:1, j})
-		}*/
+		
 		//console.log("nextPossibleCells")
 		//console.log(nextPossibleCells)
 		return nextPossibleCells
 	}
-
+	/**
+	* is a possible cell already on the path? 
+	* this prevent loops
+	*/
 	isInPath(possible, path)
 	{
 		for (var i = 0; i < path.length; i++) {

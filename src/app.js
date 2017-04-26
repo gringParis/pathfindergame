@@ -6,12 +6,12 @@ require('./style/style.scss')
 
 import { Provider } from "react-redux"
 import GameContainer from "./containers/gameContainer"
-//initialize a single gameLogic Object for the whole app
+//initialize a single gameLogic Object for the whole app ( this is more a test than a necessary design as gamelogic use external states and can finaly be initialized anywhere)
+// redux is used to keep record of current states
+//but i keep this patern for futur projects where it be usefull
 import gameLogic from "./gameLogic"
 import storeFn from "./store"
-
 gameLogic.props.fromApp = true
-//inject gameLogic to store
 var store = storeFn(gameLogic)
 
 

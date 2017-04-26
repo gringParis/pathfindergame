@@ -22,10 +22,6 @@ export default function(gameLogic){
       {
         return JSON.parse(JSON.stringify(gameLogic.endHintMode(state)))
       }
-     /* case "GAME_START":
-      {
-        return JSON.parse(JSON.stringify(gameLogic.start(state)))
-      }*/
       case "GAME_START":
       {
         return JSON.parse(JSON.stringify(gameLogic.start(state)))
