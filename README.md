@@ -1,6 +1,6 @@
 ## This is a vintage memory game
 
-player has to reproduce a path which is shown to him at the begining of each lvl
+The objectif is to reproduce the path shown on the screen, from the bottom to the top of the screen. After install read carfully the 3 lines explaining what to do :)
 
 ## Instructions to run
 
